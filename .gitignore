@@ -1,0 +1,3 @@
+# ignore the file config.py 
+config.py
+*.log
