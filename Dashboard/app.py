@@ -23,5 +23,9 @@ def data():
     return records
 
 
+@app.route("/chloropeth")
+df = pd.read_sql("SELECT * FROM airline_crash GROUP BY ")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
