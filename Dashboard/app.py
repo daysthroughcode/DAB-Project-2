@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # for pandas reqd_sql
 engine = create_engine(
-    f"postgresql://postgres:asd@localhost:5432/DAB-Project-2")
+    f"postgresql://postgres:4gttnp5t@localhost:5432/airline_crash")
 connection = engine.connect()
 
 
@@ -18,13 +18,9 @@ def hello_world():
 @app.route("/data")
 def data():
 
-    df = pd.read_sql("SELECT * FROM airline_crash ", connection)
+    df = pd.read_sql("SELECT * FROM airline_data ", connection)
     records = df.to_json()
     return records
-
-
-@app.route("/chloropeth")
-df = pd.read_sql("SELECT * FROM airline_crash GROUP BY ")
 
 
 if __name__ == "__main__":
