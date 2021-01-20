@@ -16,7 +16,7 @@ def hello_world():
 def data():
     
     df = pd.read_sql("SELECT * FROM airline_crash ",connection)
-    records = df.to_json()
+    records = df.to_json(orient='records')
     return records
 
 
