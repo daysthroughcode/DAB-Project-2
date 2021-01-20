@@ -16,8 +16,30 @@ function filterdata() {
     // let inputData = datetime.value();
     // console.log(inputData)
     let filteredData = data_one.filter(ele => ele.year === inputData);
-    console.log(filteredData);
+    // console.log(filteredData);
     render_chart(filteredData);
+
+
+    let max_filtered = filteredData.sort(function(a, b) {
+        return b.fatalities - a.fatalities;
+    });
+
+    // console.log(max_filtered[0]);
+
+    update_max_fatalities(max_filtered[0]);
+}
+
+function update_max_fatalities(max_fatalities) {
+    // let text = d3.select('max-fatalities');
+    const currentDate = new Date(max_fatalities.date)
+    const currentDayOfMonth = currentDate.getDate();
+    const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+    const currentYear = currentDate.getFullYear();
+    const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+    d3.select("#max-fatalities").text(max_fatalities.fatalities)
+    d3.select("#max-date").text(dateString)
+    d3.select("#max-departure").text(max_fatalities.origin)
+    d3.select("#max-location").text(max_fatalities.location)
 }
 
 function render_chart(data) {
@@ -31,7 +53,7 @@ function render_chart(data) {
         return a + b;
     }, 0);
     let avg = Math.round(sum / fatalities_rate.length).toFixed(1);
-    console.log(avg);
+    // console.log(avg);
 
 
     ApexCharts.exec('line', 'updateOptions', {
@@ -52,6 +74,8 @@ function render_chart(data) {
     })
 
 
+
+
 }
 
 
@@ -61,7 +85,12 @@ data_filter = data_one.filter(ele => ele.year === 2009)
 let date = data_filter.map((ele) => ele.date)
 let fatalities = data_filter.map((ele) => ele.fatalities)
 let fatalities_rate = data_filter.map((ele) => ele.fatalities_rate)
-
+let fatalities_passengers = data_filter.map((ele) => ele.fatalities_passengers)
+let fatalities_crew = data_filter.map((ele) => ele.fatalities_crew)
+fatalities_passengers = fatalities_passengers.sort((a, b) => a > b ? 1 : -1);
+fatalities_passengers = fatalities_passengers.slice(0, 5);
+fatalities_crew = fatalities_crew.sort((a, b) => a > b ? 1 : -1);
+fatalities_crew = fatalities_crew.slice(0, 5);
 
 var options = {
     series: [{
@@ -75,6 +104,9 @@ var options = {
             enabled: true
         },
         id: 'line',
+        toolbar: {
+            show: false,
+        }
     },
     dataLabels: {
         enabled: false
@@ -91,7 +123,8 @@ var options = {
         labels: {
             format: 'MMM/yyyy',
         },
-        tickAmount: 20,
+        tickAmount: 12,
+        tickPlacement: 'between',
         tooltip: {
             enabled: false,
         },
@@ -100,6 +133,7 @@ var options = {
             borderType: 'solid',
             color: 'black',
             height: 3,
+
 
         },
     },
@@ -175,3 +209,35 @@ var options_radial = {
 
 var chart_radial = new ApexCharts(document.querySelector("#chart_radial"), options_radial);
 chart_radial.render();
+
+
+// HBar Cahrt------------------------------------------------
+
+
+// var options_bar = {
+//     series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
+//     chart: {
+//         type: 'polarArea',
+//     },
+//     stroke: {
+//         colors: ['#fff']
+//     },
+//     fill: {
+//         opacity: 0.8
+//     },
+//     responsive: [{
+//         breakpoint: 480,
+//         options: {
+//             chart: {
+//                 width: 700,
+//                 height: 1050
+//             },
+//             legend: {
+//                 position: 'bottom'
+//             }
+//         }
+//     }]
+// };
+
+var chart_bar = new ApexCharts(document.querySelector("#bar-chart"), options_bar);
+chart_bar.render();

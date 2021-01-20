@@ -9,13 +9,13 @@ engine = create_engine(f"postgresql://postgres:asd@localhost:5432/DAB-Project-2"
 connection = engine.connect()
 
 @app.route('/')
-def hello_world():
+def index():
     return render_template('index.html')
 
 @app.route("/data")
 def data():
     
-    df = pd.read_sql("SELECT * FROM airline_crash ",connection)
+    df = pd.read_sql("SELECT * FROM finalcrash_data ",connection)
     records = df.to_json(orient='records')
     return records
 
