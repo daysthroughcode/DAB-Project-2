@@ -41,7 +41,7 @@ d3.json('/data', function(res) {
         const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
         d3.select("#max-fatalities").text(max_fatalities.fatalities)
         d3.select("#max-date").text(dateString)
-        d3.select("#max-departure").text(max_fatalities.origin)
+        d3.select("#max-departure").text(max_fatalities.operator)
         d3.select("#max-location").text(max_fatalities.location)
     }
 
@@ -73,36 +73,23 @@ d3.json('/data', function(res) {
 
 
     function update_hbar_chart(top_ten) {
-        var options_hbar = {
-            series: [{
-                data: top_ten.map(elem => elem.fatalities)
-            }],
-            chart: {
-                type: 'bar',
-                height: 350,
-                width: 300
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: true,
-                }
-            },
-            dataLabels: {
-                enabled: true
-            },
-            xaxis: {
-                categories: top_ten.map(elem => elem.location),
-            }
-        };
 
-        var chart_hbar = new ApexCharts(document.querySelector("#hbar_chart"), options_hbar);
-        chart_hbar.render();
+
+        ApexCharts.exec('hbar', 'updateOptions', {
+            xaxis: {
+                categories: top_ten.map(elem => elem.fatalities)
+            }
+        }, false, true);
+
+        ApexCharts.exec('hbar', 'updateSeries', [{
+            data: top_ten.map(elem => elem.operator)
+        }], true);
 
     }
 
     data_filter = data_one.filter(ele => ele.year === 2019)
 
-    // Initiliasing
+    // Initiliasing the index html page
     let date = data_filter.map((ele) => ele.date)
     let fatalities = data_filter.map((ele) => ele.fatalities)
     let fatalities_rate = data_filter.map((ele) => ele.fatalities_rate)
@@ -113,6 +100,12 @@ d3.json('/data', function(res) {
     fatalities_crew = fatalities_crew.sort((a, b) => a > b ? 1 : -1);
     fatalities_crew = fatalities_crew.slice(0, 5);
 
+    let max_filtered_init = data_filter.sort(function(a, b) {
+        return b.fatalities - a.fatalities;
+    });
+
+    let top_five = max_filtered_init.slice(0, 5);
+    // First line Chart
     var options = {
         series: [{
             name: "Fatalities",
@@ -234,13 +227,13 @@ d3.json('/data', function(res) {
 
     // HBar Cahrt------------------------------------------------
 
-
     var options_hbar = {
         series: [{
-            data: top_ten.map(elem => elem.fatalities)
+            data: top_five.map(elem => elem.fatalities)
         }],
         chart: {
             type: 'bar',
+            id: "hbar",
             height: 350,
             width: 300
         },
@@ -253,13 +246,12 @@ d3.json('/data', function(res) {
             enabled: true
         },
         xaxis: {
-            categories: top_ten.map(elem => elem.location),
+            categories: top_five.map(elem => elem.operator),
         }
     };
 
     var chart_hbar = new ApexCharts(document.querySelector("#hbar_chart"), options_hbar);
     chart_hbar.render();
-
 
     // End
 
