@@ -1,4 +1,3 @@
-// alert('Hi Bima 2l');
 d3.json('/data', function(res) {
     console.log(res);
     // Start
@@ -34,7 +33,7 @@ d3.json('/data', function(res) {
     }
 
     function update_max_fatalities(max_fatalities) {
-        // let text = d3.select('max-fatalities');
+
         const currentDate = new Date(max_fatalities.date)
         const currentDayOfMonth = currentDate.getDate();
         const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
@@ -101,7 +100,7 @@ d3.json('/data', function(res) {
 
     }
 
-    data_filter = data_one.filter(ele => ele.year === 2009)
+    data_filter = data_one.filter(ele => ele.year === 2019)
 
     // Initiliasing
     let date = data_filter.map((ele) => ele.date)
@@ -236,33 +235,32 @@ d3.json('/data', function(res) {
     // HBar Cahrt------------------------------------------------
 
 
-    // var options_bar = {
-    //     series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
-    //     chart: {
-    //         type: 'polarArea',
-    //     },
-    //     stroke: {
-    //         colors: ['#fff']
-    //     },
-    //     fill: {
-    //         opacity: 0.8
-    //     },
-    //     responsive: [{
-    //         breakpoint: 480,
-    //         options: {
-    //             chart: {
-    //                 width: 700,
-    //                 height: 1050
-    //             },
-    //             legend: {
-    //                 position: 'bottom'
-    //             }
-    //         }
-    //     }]
-    // };
+    var options_hbar = {
+        series: [{
+            data: top_ten.map(elem => elem.fatalities)
+        }],
+        chart: {
+            type: 'bar',
+            height: 350,
+            width: 300
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+            }
+        },
+        dataLabels: {
+            enabled: true
+        },
+        xaxis: {
+            categories: top_ten.map(elem => elem.location),
+        }
+    };
 
-    var chart_bar = new ApexCharts(document.querySelector("#bar-chart"), options_bar);
-    chart_bar.render();
+    var chart_hbar = new ApexCharts(document.querySelector("#hbar_chart"), options_hbar);
+    chart_hbar.render();
+
+
     // End
 
 });
