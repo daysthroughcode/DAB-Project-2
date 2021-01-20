@@ -12,13 +12,20 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 
 <body>
-
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
     <h1>Project-3</h1>
-    <script src="../Dashboard/resources/heatmap.js"></script>
+    <script src="" async defer></script>
+    <script>
+        d3.json('/data0', function(res){
+            console.log(res);
+        })
+    </script>
 </body>
 
 </html>
