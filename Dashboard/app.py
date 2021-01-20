@@ -9,8 +9,16 @@ engine = create_engine(f"postgresql://postgres:asd@localhost:5432/DAB-Project-2"
 connection = engine.connect()
 
 @app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/view_one')
+def view1():
+    return render_template('view_one.html')
+@app.route('/view_two')
+def view2():
+    return render_template('view_two.html')
 
 @app.route("/data")
 def data():
