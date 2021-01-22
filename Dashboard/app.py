@@ -41,6 +41,16 @@ def data2():
     records = df.to_json(orient='records')
     return records
 
+@app.route("/fatalitiesyear")
+def data5():
+
+    df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
+    df = df.groupby(['year']).sum().reset_index()
+    df=df.sort_values(['fatalities'],ascending=False)
+    
+    records = df.to_json(orient='records')
+    return records
+
 
 @app.route("/operators")
 def data3():
@@ -55,6 +65,14 @@ def data4():
 
     df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
     df = df.groupby(['year']).count().reset_index().sort_values(['fatalities'],ascending=False)
+    records = df.to_json(orient='records')
+    return records
+
+@app.route("/aircraft_type")
+def data6():
+
+    df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
+    df = df.groupby(['ac_type']).count().reset_index().sort_values(['fatalities'],ascending=False)
     records = df.to_json(orient='records')
     return records
 
