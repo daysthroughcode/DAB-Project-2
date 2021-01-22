@@ -71,7 +71,7 @@ body {
 }
 
 .navbar {
-    background: #ffffff;
+    background: #f1f0f0;
     grid-area: nav;
     height: 60px;
     display: flex;
@@ -136,7 +136,7 @@ body {
 
 .searchbar:hover>.search_input {
     /* padding: 5px 10px; */
-    width: 50px;
+    width: 180px;
     caret-color: rgb(33, 185, 140);
     transition: width 0.4s linear;
 }
@@ -180,7 +180,7 @@ body {
 }
 
 main {
-    background: #f3f4f6;
+    background: #fdfdfd;
     grid-area: main;
     overflow-y: auto;
 }
@@ -345,7 +345,8 @@ main {
 }
 
 .card3 {
-    background: #d6d8d9;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    /* background: #d6d8d9; */
     color: #3a3e41;
     text-align: center;
     padding: 25px;
@@ -354,7 +355,8 @@ main {
 }
 
 .card4 {
-    background: #fddcdf;
+    background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
+    /* background: #ffec44; */
     color: #f65a6f;
     text-align: center;
     padding: 25px;

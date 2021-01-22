@@ -143,7 +143,7 @@ d3.json('/data', function(res) {
         },
 
         title: {
-            text: 'Fatalities by Month',
+            text: 'Fatalities by Year',
             align: 'centre'
         },
 
@@ -197,6 +197,9 @@ d3.json('/data', function(res) {
             height: 350,
             type: 'radialBar',
             offsetY: -10,
+            toolbar: {
+                show: false
+            }
 
         },
         plotOptions: {
@@ -251,14 +254,22 @@ d3.json('/data', function(res) {
         chart: {
             id: "hbar",
             type: 'bar',
-
+            toolbar: {
+                show: false
+            },
             height: 350,
-            width: 300
+            width: 300,
+            foreColor: 'white'
         },
         plotOptions: {
             bar: {
                 horizontal: true,
             }
+        },
+        title: {
+            text: 'Fatalities by Airlines',
+            align: 'centre',
+
         },
         dataLabels: {
             enabled: true
