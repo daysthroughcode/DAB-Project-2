@@ -19,6 +19,10 @@ def view1():
 @app.route('/view_two')
 def view2():
     return render_template('view_two.html')
+@app.route('/view_three')
+def view3():
+    return render_template('view_three.html')
+    
 
 @app.route("/data")
 def data():

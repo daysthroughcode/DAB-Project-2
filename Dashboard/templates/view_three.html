@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
     <link rel="stylesheet" href="../static/style/styles.css" />
     <title>Dashboard | Project</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body id="body">
@@ -19,110 +16,136 @@
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </div>
             <div class="navbar__left">
-                <a class="active_link" href="/index">Admin</a>
+                <a href="/index">Admin</a>
                 <a href="/view_one">Analytics</a>
                 <a href="/view_two">Visuals</a>
-                <a href="/view_three">Documentation</a>
+                <a class="active_link" href="/view_three">Documentation</a>
 
             </div>
             <div class="navbar__right">
-                <form action="" id="form-inline" class="searchbar">
-                    <input id='datetime' class="search_input" type="text" name="" placeholder="Search by year 1908-2019">
-                    <button id="filter-btn" style="opacity: 0.1;cursor: pointer;" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-
-                </form>
+                <a href="#">
+                    <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+                </a>
 
                 <a href="#">
-                    <img width="30" src="../resources/avatar.svg" alt="" />
+                    <img width="30" src="assets/avatar.svg" alt="" />
                     <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
                 </a>
             </div>
         </nav>
 
         <main>
-            <div class="main__container">
+            <div style="background-image: radial-gradient(73% 147%, #EADFDF 59%, #ECE2DF 100%), radial-gradient(91% 146%, rgba(255,255,255,0.50) 47%, rgba(0,0,0,0.50) 100%);
+            background-blend-mode: screen;" class="main__container">
                 <!-- MAIN TITLE STARTS HERE -->
 
                 <div class="main__title">
                     <!-- <img src="http://placeskull.com/30/30" alt="" /> -->
                     <div class="main__greeting">
                         <h1>Airplane Crash EDA</h1>
-                        <p>Welcome to our admin dashboard</p>
+                        <!-- <p>Welcome to our admin dashboard</p> -->
                     </div>
                 </div>
 
                 <!-- MAIN TITLE ENDS HERE -->
 
                 <!-- MAIN CARDS STARTS HERE -->
-                <div class="main__cards">
+                <!-- <div class="main__cards">
                     <div class="card">
                         <i class="fa fa-user-o fa-2x text-lightblue" aria-hidden="true"></i>
                         <div class="card_inner">
-                            <p class="text-primary-p">Max. Number Fatalities</p>
-                            <span id="max-fatalities" class="font-bold text-title">157</span>
+                            <p class="text-primary-p">Profile</p>
+                           
                         </div>
                     </div>
 
-                    <div class="card">
-                        <i class="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
-                        <div class="card_inner">
-                            <p class="text-primary-p">Date of Event</p>
-                            <span id="max-date" class="font-bold text-title">10/03/2019</span>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <i class="fa fa-plane fa-2x text-green" aria-hidden="true"></i>
-                        <div class="card_inner">
-                            <p class="text-primary-p">Operator</p>
-                            <span id="max-departure" class="font-bold text-title">Ethiopian Airlines</span>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <i class="fa fa-warning fa-2x text-red" aria-hidden="true"></i>
-                        <div class="card_inner">
-                            <p class="text-primary-p">Crash Loc.</p>
-                            <span id="max-location" class="font-bold text-title">Bishoftu, Ethiopia</span>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
                 <!-- MAIN CARDS ENDS HERE -->
 
                 <!-- CHARTS STARTS HERE -->
                 <div class="charts">
-                    <div class="charts__left">
+                    <div style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="charts__left">
                         <div class="charts__left__title">
+                            <!-- <i class="fa fa-database" aria-hidden="true"></i> -->
                             <div>
                                 <h1>Crash Report</h1>
-                                <!-- <p id="max-location">Cupertino, California, USA</p> -->
+                                <p style="font-size: 18px;">The project kicked-off with an intention to analyze the available data of airline crashes from 1908 till 2019.</p>
+                                <p style="font-size: 18px;"> Kaggle for data set - 4000+ records</p>
+                                </br>
+                                <h1>Hypothesis:- </h1>
+                                <div style="font-size: 19px;color:#a5aaad;margin: 25px 10px">
+                                    <ul style="margin: 25px 10px;">
+                                        <li>
+                                            Is there any link between the different time periods and the fatality rate?
+                                        </li>
+                                        <p></p>
+                                        <li>
+                                            What has been the overall trend for air travel fatalities?
+                                        </li>
+                                        <p></p>
+                                        <li>
+                                            What are the most dangerous aircraft operators?
+                                        </li>
+                                        <p></p>
+                                        <li>
+                                            What are the most dangerous airports?
+                                        </li>
+                                        <p></p>
+                                        <li>
+                                            Which origin points had the most accidents?
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                                <h1>Visualization techniques</h1>
+                                <p style="font-size: 18px;">Python Flask-powered API Endpoints created with server-side rendering.</br>
+                                    HTML, CSS, Python,Plotly ,Geopy ,Apex.js,Vanilla JavaScript and D3.js used in combination for creating visuals including graphs and charts.</p>
+
+
+
                             </div>
-                            <i class="fa fa-database" aria-hidden="true"></i>
+
                         </div>
                         <div id="apex1"></div>
-                        <!-- Charts go here -->
                     </div>
 
                     <div class="charts__right">
                         <div class="charts__right__title">
                             <div>
-                                <h1>Stats Reports</h1>
+                                <h1>API Endpoints</h1>
                                 <!-- <p>Cupertino, California, USA</p> -->
                             </div>
                             <i class="fa fa-fire" aria-hidden="true"></i>
                         </div>
 
                         <div class="charts__right__cards">
-                            <div class="card4">
-                                <div id="chart_radial"></div>
+                            <div class="card1">
+                                <h1>Data Endpoint</h1>
+
+                                <a style="color:white;text-decoration:none;font-size:25px" href="http://127.0.0.1:5000/data">/data</a>
+
+                                <!-- <p>localhost/data</p> -->
                             </div>
+
+                            <div class="card2">
+                                <h1>Operators Endpoint</h1>
+                                <a style="color:white;text-decoration:none;font-size:25px" href="http://127.0.0.1:5000/operators">/operators</a>
+                            </div>
+
                             <div class="card3">
-                                <div id="hbar_chart"></div>
+                                <h1>Origins Endpoint</h1>
+                                <a style="color:white;text-decoration:none;font-size:25px" href="http://127.0.0.1:5000/wc_origins">/wc_origins</a>
+
                             </div>
 
-
+                            <div class="card4">
+                                <h1>Landing Sites Endpoint</h1>
+                                <a style="color:white;text-decoration:none;font-size:25px" href="http://127.0.0.1:5000/landingsites">/landingsites</a>
+                            </div>
                         </div>
                     </div>
+
                 </div>
                 <!-- CHARTS ENDS HERE -->
             </div>
@@ -171,9 +194,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="../static/script.js"></script>
-    <script src="../static/data.js"></script>
-    <script src="static/read_data.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

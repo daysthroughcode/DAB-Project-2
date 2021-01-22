@@ -262,7 +262,7 @@ main {
 
 .charts__left__title>div>h1 {
     font-size: 24px;
-    color: #2e4a66;
+    color: #3683cfd3;
     margin-bottom: 5px;
 }
 
@@ -327,7 +327,8 @@ main {
 }
 
 .card1 {
-    background: #d1ecf1;
+    background-image: linear-gradient(60deg, #3d3393 0%, #2b76b9 37%, #2cacd1 65%, #35eb93 100%);
+    /* background: #d1ecf1; */
     color: #35a4ba;
     text-align: center;
     padding: 25px;
@@ -336,7 +337,7 @@ main {
 }
 
 .card2 {
-    background: #d2f9ee;
+    background-image: linear-gradient(-225deg, #DFFFCD 0%, #90F9C4 48%, #39F3BB 100%);
     color: #38e1b0;
     text-align: center;
     padding: 25px;
