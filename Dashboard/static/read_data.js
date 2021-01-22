@@ -20,34 +20,19 @@ d3.json('/data', function(res) {
         // Rendering the first line graphs
         render_chart(filteredData);
 
-        // Sorting the filterred data
-        let max_filtered = filteredData.sort(function(a, b) {
-            return b.fatalities - a.fatalities;
-        });
 
-        let top_ten = max_filtered.slice(0, 5);
-        console.log(top_ten);
-        update_hbar_chart(top_ten);
-        // To update the text within the html
-        update_max_fatalities(max_filtered[0]);
     }
 
-    function update_max_fatalities(max_fatalities) {
 
-        const currentDate = new Date(max_fatalities.date)
-        const currentDayOfMonth = currentDate.getDate();
-        const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
-        const currentYear = currentDate.getFullYear();
-        const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
-        d3.select("#max-fatalities").text(max_fatalities.fatalities)
-        d3.select("#max-date").text(dateString)
-        d3.select("#max-departure").text(max_fatalities.operator)
-        d3.select("#max-location").text(max_fatalities.location)
-    }
 
     function render_chart(data) {
         let date = data.map((ele) => ele.date);
         let fatalities = data.map((ele) => ele.fatalities);
+        // Sorting the filterred data
+        let max_filtered = data.sort(function(a, b) {
+            return b.fatalities - a.fatalities;
+        });
+
         let fatalities_rate = data.map((ele) => {
             return ele.fatalities_rate;
         });
@@ -68,23 +53,54 @@ d3.json('/data', function(res) {
         chart_radial.updateOptions({
             series: [avg]
         })
+        update_max_fatalities(max_filtered[0]);
+
+        let top_ten = max_filtered.slice(0, 5);
+        // console.log(top_ten);
+        update_hbar_chart(top_ten);
+        // To update the text within the html
+
 
     }
 
 
-    function update_hbar_chart(top_ten) {
+    function update_hbar_chart(data) {
+        // console.log(data.map(elem => elem.operator));
 
+        // options_hbar.updateOptions({
+        //     xaxis: {
+        //         categories: data.map(elem => elem.operator)
+        //     }
+        // })
 
-        ApexCharts.exec('hbar', 'updateOptions', {
+        // ApexCharts.exec('hbar', 'updateSeries', {
+        //     series: [{
+        //         data: data.map(elem => elem.fatalities)
+        //     }],
+        // }, true);
+
+        chart_hbar.updateOptions({
+            series: [{
+                data: data.map(elem => elem.fatalities)
+            }],
             xaxis: {
-                categories: top_ten.map(elem => elem.fatalities)
+                categories: data.map(elem => elem.operator)
             }
-        }, false, true);
+        })
 
-        ApexCharts.exec('hbar', 'updateSeries', [{
-            data: top_ten.map(elem => elem.operator)
-        }], true);
+    }
 
+    function update_max_fatalities(max_fatalities) {
+
+        const currentDate = new Date(max_fatalities.date)
+        const currentDayOfMonth = currentDate.getDate();
+        const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+        const currentYear = currentDate.getFullYear();
+        const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+        d3.select("#max-fatalities").text(max_fatalities.fatalities)
+        d3.select("#max-date").text(dateString)
+        d3.select("#max-departure").text(max_fatalities.operator)
+        d3.select("#max-location").text(max_fatalities.location)
     }
 
     data_filter = data_one.filter(ele => ele.year === 2019)
@@ -229,11 +245,13 @@ d3.json('/data', function(res) {
 
     var options_hbar = {
         series: [{
+            name: "Fatalities",
             data: top_five.map(elem => elem.fatalities)
         }],
         chart: {
-            type: 'bar',
             id: "hbar",
+            type: 'bar',
+
             height: 350,
             width: 300
         },
@@ -250,7 +268,7 @@ d3.json('/data', function(res) {
         }
     };
 
-    var chart_hbar = new ApexCharts(document.querySelector("#hbar_chart"), options_hbar);
+    let chart_hbar = new ApexCharts(document.querySelector("#hbar_chart"), options_hbar);
     chart_hbar.render();
 
     // End

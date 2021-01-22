@@ -26,6 +26,49 @@ def data():
     df = pd.read_sql("SELECT * FROM finalcrash_data ",connection)
     records = df.to_json(orient='records')
     return records
+    
+@app.route("/landingsites")
+def data2():
+
+    df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
+    df = df.groupby(['country']).sum().reset_index()
+    df=df.sort_values(['fatalities'],ascending=False)
+    
+    records = df.to_json(orient='records')
+    return records
+
+
+@app.route("/operators")
+def data3():
+
+    df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
+    df = df.groupby(['operator']).count().reset_index().sort_values(['fatalities'],ascending=False)
+    records = df.to_json(orient='records')
+    return records
+
+@app.route("/year")
+def data4():
+
+    df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
+    df = df.groupby(['year']).count().reset_index().sort_values(['fatalities'],ascending=False)
+    records = df.to_json(orient='records')
+    return records
+
+@app.route("/data0")
+def data0():
+
+    df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
+    df = df.groupby(['ac_type','operator'])['fatalities'].sum().reset_index()
+    records = df.to_json(orient='records')
+    return records
+
+@app.route("/wc_origins")    
+def wc_origins():
+    df = pd.read_sql("SELECT * FROM finalcrash_data ", connection)
+    df = df.groupby(['origin']).size().reset_index(name='counts')
+    df.rename(columns={'origin':'word', 'counts':'size'}, inplace=True)
+    records = df.to_json(orient='records')
+    return records    
 
 
 if __name__ == "__main__":
